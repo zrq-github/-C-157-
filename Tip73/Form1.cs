@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Tip73
 {
@@ -33,6 +34,7 @@ namespace Tip73
                     foreach (var item in tempList)
                     {
                         Thread.Sleep(1000);
+                        Debug.WriteLine($"thread 1{item}");
                     }
                 }
             });
@@ -48,6 +50,7 @@ namespace Tip73
                 lock (syncObj)
                 {
                     tempList.RemoveAt(1);
+                    Debug.WriteLine($"thread 2");
                 }
             });
             t2.IsBackground = true;

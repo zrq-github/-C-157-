@@ -77,68 +77,66 @@ namespace Tip85
         //    Console.ReadKey();
         //}
 
-        //static event EventHandler<AggregateExceptionArgs> AggregateExceptionCatched;
 
-        //public class AggregateExceptionArgs : EventArgs
-        //{
-        //    public AggregateException AggregateException { get; set; }
-        //}
-
-        //static void Main(string[] args)
-        //{
-        //    AggregateExceptionCatched += new EventHandler<AggregateExceptionArgs>(Program_AggregateExceptionCatched);
-        //    Task t = new Task(() =>
-        //    {
-        //        try
-        //        {
-        //            throw new InvalidOperationException("任务并行编码中产生的未知异常");
-        //        }
-        //        catch (Exception err)
-        //        {
-        //            AggregateExceptionArgs errArgs = new AggregateExceptionArgs() { AggregateException = new AggregateException(err) };
-        //            AggregateExceptionCatched(null, errArgs);
-        //        }
-        //    });
-        //    t.Start();
-
-        //    Console.WriteLine("主线程马上结束");
-        //    Console.ReadKey();
-
-        //}
-
-        //static void Program_AggregateExceptionCatched(object sender, AggregateExceptionArgs e)
-        //{
-        //    foreach (var item in e.AggregateException.InnerExceptions)
-        //    {
-        //        Console.WriteLine("异常类型：{0}{1}来自于：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine, item.Source, Environment.NewLine, item.Message);
-        //    }
-        //}
-
-        static void Main()
+        // 通过事件来包装异常
+        static event EventHandler<AggregateExceptionArgs> AggregateExceptionCatched;
+        public class AggregateExceptionArgs : EventArgs
         {
-            TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(TaskScheduler_UnobservedTaskException);
+            public AggregateException AggregateException { get; set; }
+        }
+        static void Main(string[] args)
+        {
+            AggregateExceptionCatched += new EventHandler<AggregateExceptionArgs>(Program_AggregateExceptionCatched);
             Task t = new Task(() =>
             {
-                throw new Exception("任务并行编码中产生的未知异常");
+                try
+                {
+                    throw new InvalidOperationException("任务并行编码中产生的未知异常");
+                }
+                catch (Exception err)
+                {
+                    AggregateExceptionArgs errArgs = new AggregateExceptionArgs() { AggregateException = new AggregateException(err) };
+                    AggregateExceptionCatched(null, errArgs);
+                }
             });
             t.Start();
-            Console.ReadKey();
-            t.Dispose();
-            t = null;
-            //GC.Collect(0);
+
             Console.WriteLine("主线程马上结束");
             Console.ReadKey();
         }
-
-        static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        static void Program_AggregateExceptionCatched(object sender, AggregateExceptionArgs e)
         {
-            foreach (Exception item in e.Exception.InnerExceptions)
+            foreach (var item in e.AggregateException.InnerExceptions)
             {
                 Console.WriteLine("异常类型：{0}{1}来自于：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine, item.Source, Environment.NewLine, item.Message);
             }
-            //将异常标识为已经观察到
-            e.SetObserved();
         }
 
+
+        //// 不建议的使用方式
+        //static void Main()
+        //{
+        //    TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(TaskScheduler_UnobservedTaskException);
+        //    Task t = new Task(() =>
+        //    {
+        //        throw new Exception("任务并行编码中产生的未知异常");
+        //    });
+        //    t.Start();
+        //    Console.ReadKey();
+        //    t.Dispose();
+        //    t = null;
+        //    //GC.Collect(0);
+        //    Console.WriteLine("主线程马上结束");
+        //    Console.ReadKey();
+        //}
+        //static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        //{
+        //    foreach (Exception item in e.Exception.InnerExceptions)
+        //    {
+        //        Console.WriteLine("异常类型：{0}{1}来自于：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine, item.Source, Environment.NewLine, item.Message);
+        //    }
+        //    //将异常标识为已经观察到
+        //    e.SetObserved();
+        //}
     }
 }
