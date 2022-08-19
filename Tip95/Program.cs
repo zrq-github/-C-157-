@@ -29,6 +29,8 @@ namespace Tip95
 
         class American : Person
         {
+            // 这样写可以避免错误
+            //Race Race = new Race() { Name = "123" };
             Race Race;
 
             public American()
