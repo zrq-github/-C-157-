@@ -14,19 +14,16 @@ namespace Tip104
             commander = new StopCommander();
             Drive(commander);
         }
-
         static void Drive(Commander commander)
         {
             commander.Execute();
         }
-
     }
 
     abstract class Commander
     {
         public abstract void Execute();
     }
-
     class StartCommander : Commander
     {
 
@@ -35,7 +32,6 @@ namespace Tip104
             //启动
         }
     }
-
     class StopCommander : Commander
     {
 
