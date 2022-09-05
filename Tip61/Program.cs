@@ -9,11 +9,14 @@ namespace Tip61
     {
         static void Main(string[] args)
         {
+            User user = TestUserReturnInTry();
         }
 
         private static int TestIntReturnBelowFinally()
         {
             int i;
+            int j = 11;
+            int k = j;
             try
             {
                 i = 1;
@@ -70,8 +73,6 @@ namespace Tip61
                 Console.WriteLine("\t将user置为anull");
             }
         }
-
-
     }
 
     class User

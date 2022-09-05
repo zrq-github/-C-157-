@@ -15,7 +15,7 @@ namespace Tip62
         {
             InitializeComponent();
 
-            NestedExceptionSample nes = new NestedExceptionSample();
+            NestedExceptionSample2 nes = new NestedExceptionSample2();
             try
             {
                 nes.MethodWithTry();

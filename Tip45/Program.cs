@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Tip45
             Programmer p = new Programmer { Name = "Mike" };
             Manager m = new Manager { Name = "Steve" };
             Test(p, m);
+
+            //IComparer
         }
 
         static void Test<T>(IMyComparable<T> t1, T t2)

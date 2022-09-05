@@ -26,6 +26,9 @@ namespace Tip43
         //    IList<Manager> managers = new List<Manager>();
         //    PrintPersonName(programmers);
         //    PrintPersonName(managers);
+
+        //    //// 异常, 没有协变的情况下
+        //    //PrintList(managers);
         //}
 
         //static void PrintPersonName(IEnumerable<Employee> persons)
@@ -36,6 +39,13 @@ namespace Tip43
         //    }
         //}
 
+        //static void PrintList(IList<Employee> persons)    //用法正确
+        //{
+        //    foreach (Employee person in persons)
+        //    {
+        //        Console.WriteLine(person.Name);
+        //    }
+        //}
     }
 
     interface ISalary<out T>	//使用out关键字
