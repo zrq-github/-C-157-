@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 namespace Tip1
 {
@@ -9,6 +11,16 @@ namespace Tip1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine($"PI = {Math.PI,10:N}");
+
+            DateTime dateTime = DateTime.Now;
+            for (int i = 0; i < 1000000000; i++)
+            {
+                var a = string_newformat();
+            }
+            DateTime doDateTime = DateTime.Now;
+            Console.WriteLine((doDateTime - dateTime).TotalSeconds);
+            Console.ReadKey();
         }
 
         private static void NewMethod1()
@@ -84,6 +96,26 @@ namespace Tip1
             string.Format("{0}{1}{2}{3}", a, b, c, d);
         }
 
+        /// <summary>
+        /// 对比 string_newformat
+        /// </summary>
+        private static string string_format()
+        {
+            //为了演示必要，定义了4个变量
+            string a = "a";
+            string b = "b";
+            return string.Format("{0}{1}", a, b);
+        }
 
+        /// <summary>
+        /// 使用新的测试
+        /// </summary>
+        private static string string_newformat()
+        {
+            //为了演示必要，定义了4个变量
+            string a = "a";
+            string b = "b";
+            return $"{a}{b}";
+        }
     }
 }
