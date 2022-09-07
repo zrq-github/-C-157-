@@ -7,22 +7,23 @@ namespace Tip38
 {
     class Program
     {
-        //static void Main(string[] args)
-        //{
-        //    List<Action> lists = new List<Action>();
-        //    for (int i = 0; i < 5; i++)
-        //    {
-        //        Action t = () =>
-        //        {
-        //            Console.WriteLine(i.ToString());
-        //        };
-        //        lists.Add(t);
-        //    }
-        //    foreach (Action t in lists)
-        //    {
-        //        t();
-        //    }
-        //}
+        static void Main(string[] args)
+        {
+            List<Action> lists = new List<Action>();
+            for (int i = 0; i < 5; i++)
+            {
+                Action t = () =>
+                {
+                    Console.WriteLine(i.ToString());
+                };
+                lists.Add(t);
+            }
+            foreach (Action t in lists)
+            {
+                t();
+            }
+            Console.ReadKey();
+        }
 
         //static void Main(string[] args)
         //{
@@ -48,23 +49,23 @@ namespace Tip38
         //    }
         //}
 
-        static void Main(string[] args)
-        {
-            List<Action> lists = new List<Action>();
-            for (int i = 0; i < 5; i++)
-            {
-                int temp = i;
-                Action t = () =>
-                {
-                    Console.WriteLine(temp.ToString());
-                };
-                lists.Add(t);
-            }
-            foreach (Action t in lists)
-            {
-                t();
-            }
-        }
+        //static void Main(string[] args)
+        //{
+        //    List<Action> lists = new List<Action>();
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        int temp = i;
+        //        Action t = () =>
+        //        {
+        //            Console.WriteLine(temp.ToString());
+        //        };
+        //        lists.Add(t);
+        //    }
+        //    foreach (Action t in lists)
+        //    {
+        //        t();
+        //    }
+        //}
 
         //static void Main(string[] args)
         //{
