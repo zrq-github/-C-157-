@@ -11,8 +11,7 @@ namespace Tip1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"PI = {Math.PI,10:N}");
-
+            //Console.WriteLine($"PI = {Math.PI,10:N}");
             DateTime dateTime = DateTime.Now;
             for (int i = 0; i < 1000000000; i++)
             {

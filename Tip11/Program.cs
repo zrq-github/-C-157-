@@ -9,6 +9,10 @@ namespace Tip11
     {
         static void Main(string[] args)
         {
+            //ValueTypeOPEquals();
+            //ReferenceTypeOPEquals();
+            //ValueTypeEquals();
+            //ReferenceTypeEquals();
         }
 
         static void ValueTypeOPEquals()
@@ -48,13 +52,17 @@ namespace Tip11
         {
             object a = new Person("NB123");
             object b = new Person("NB123");
-            //False
+            // True
             Console.WriteLine(a.Equals(b));
+            // False
+            Object.ReferenceEquals(a, b);
+
             b = a;
             //True
             Console.WriteLine(a.Equals(b));
+            // True
+            Object.ReferenceEquals(a, b);
         }
-
     }
 
     class Person
